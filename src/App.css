@@ -1,0 +1,25 @@
+#root {
+  padding: 32px;
+}
+@media (max-width: 820px), print {
+  #root {
+    padding: 0;
+  }
+  .paper {
+    margin: 0 !important;
+    box-shadow: none !important;
+    height: 100% !important;
+  }
+}
+
+.paper {
+  box-sizing: border-box;
+  width: 210mm;
+  margin: 0 auto;
+  padding: 32px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.ant-table-tbody > tr.ant-table-row:hover > td {
+  background-color: unset !important;
+}

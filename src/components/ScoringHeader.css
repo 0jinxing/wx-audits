@@ -1,0 +1,41 @@
+.scoring-header {
+  margin: 32px 0 20px;
+}
+
+.scoring-title {
+  font-size: 18px;
+  padding-left: 10px;
+  position: relative;
+}
+
+.scoring-title::after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 14px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background-color: #1890ff;
+}
+
+.scoring-header.a .scoring-title::after {
+  background-color: #52c41a;
+}
+
+.scoring-header.b .scoring-title::after {
+  background-color: #1890ff;
+}
+
+.scoring-header.c .scoring-title::after {
+  background-color: #faad14;
+}
+
+.scoring-header.d .scoring-title::after {
+  background-color: #ff4d4f;
+}
+
+.scoring-sub-title {
+  color: #999;
+  margin: 0;
+}
