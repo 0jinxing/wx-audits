@@ -1,0 +1,23 @@
+.scoring-range {
+  font-size: 12px;
+  font-weight: normal;
+  display: flex;
+}
+
+.scoring-range-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 40px;
+}
+.scoring-range-item:last-child {
+  margin-right: 0;
+}
+
+.scoring-range-color {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 4px;
+  margin-right: 4px;
+}

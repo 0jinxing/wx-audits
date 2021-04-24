@@ -12,12 +12,14 @@ export type TaskMetaType = {
   passedTitle: string;
   failedTitle: string;
   description: string;
-  document: string;
+  document?: string;
 };
 
 export type TaskHeadingType = {
   key: string;
   text: string;
+  type?: string;
+  style?: string;
 };
 
 export type TaskStackType = Array<{
@@ -42,7 +44,7 @@ export type TaskType = {
   headings: TaskHeadingType[];
   details: TaskDetailType[];
   score: number;
-  failedSummary: string;
+  failedSummary?: string;
 };
 
 export type AuditsType = {

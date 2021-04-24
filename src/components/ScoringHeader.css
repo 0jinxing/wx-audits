@@ -1,5 +1,7 @@
 .scoring-header {
   margin: 32px 0 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
 }
 
 .scoring-title {
@@ -16,7 +18,7 @@
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  background-color: #1890ff;
+  background-color: 1890ff;
 }
 
 .scoring-header.a .scoring-title::after {
@@ -28,11 +30,11 @@
 }
 
 .scoring-header.c .scoring-title::after {
-  background-color: #faad14;
+  background-color: #1890ff;
 }
 
 .scoring-header.d .scoring-title::after {
-  background-color: #ff4d4f;
+  background-color: #faad14;
 }
 
 .scoring-sub-title {

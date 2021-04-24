@@ -1,10 +1,15 @@
 import React from "react";
-import { CategoryType } from "./audits";
-import data from "./audits.json";
+import { AuditsType, CategoryType } from "./audits";
 import Categories from "./components/Categories";
+import ScoringRange from "./components/ScoringRange";
 import "./App.css";
 import ScoringHeader from "./components/ScoringHeader";
-import TaskDetail from "./components/TaskDetail";
+import Task from "./components/Task";
+
+// @ts-ignore
+const data: AuditsType = window.audits;
+// @ts-ignore
+const title = window.title;
 
 function App() {
   const categories: CategoryType[] = [
@@ -19,22 +24,22 @@ function App() {
 
   return (
     <div className="paper">
-      <h1
-        style={{
-          fontSize: 24,
-          textAlign: "center",
-          marginBottom: 20,
-          paddingBottom: 20,
-        }}
-      >
-        体验评分
+      <h1 className="paper-title">
+        {title}
+        <ScoringRange />
       </h1>
       <Categories categories={categories} />
 
-      {data.categories.map((i) => (
-        <ScoringHeader {...i} />
+      {data.categories.map((c) => (
+        <div key={c.type}>
+          <ScoringHeader key={c.type} {...c} />
+          {data.tasks
+            .filter((t) => t.scoringCategory === c.type && t.score !== 100)
+            .map((i) => (
+              <Task key={i.meta.id} {...i} />
+            ))}
+        </div>
       ))}
-      <TaskDetail headings={data.tasks[20].headings} details={data.tasks[20].details} />
     </div>
   );
 }
