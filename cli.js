@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-const path = require("path");
+const os = require("os");
 const fs = require("fs");
+const path = require("path");
 const puppeteer = require("puppeteer");
-const { createServer } = require("vite");
+const { createServer, build } = require("vite");
 const { minifyHtml, injectHtml } = require("vite-plugin-html");
 const { defineConfig } = require("vite");
-const reactRefresh = require("@vitejs/plugin-react-refresh");
 const { Command } = require("commander");
 const chalk = require("chalk");
 
@@ -26,27 +26,36 @@ const outputPath = options.output || "./" + Date.now() + ".pdf";
 const title = options.title || "微信小程序 AUDITS";
 
 async function exportPdf() {
-  const server = await createServer(
+  const outDir = path.resolve(os.tmpdir(), "wx-audits-output");
+  const auditsData = require(path.resolve(dataPath));
+  await build(
     defineConfig({
       root: __dirname,
-      logLevel: "silent",
+      clearScreen: false,
+      build: { outDir, emptyOutDir: true },
       plugins: [
-        reactRefresh(),
         minifyHtml(),
         injectHtml({
           injectData: {
             injectScript: `<script>
-                window.title = ${JSON.stringify(title)};
-                window.audits = ${JSON.stringify(
-                  require(path.resolve(dataPath))
-                )};
-              </script>`,
+              window.title = ${JSON.stringify(title)};
+              window.audits = ${JSON.stringify(auditsData)};
+            </script>`,
           },
         }),
       ],
     })
   );
+
+  const server = await createServer({
+    configFile: false,
+    root: outDir,
+    logLevel: "silent",
+    clearScreen: false,
+  });
+
   await server.listen();
+
   const browser = await puppeteer.launch({});
   const page = await browser.newPage();
 
