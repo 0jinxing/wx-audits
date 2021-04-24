@@ -3,10 +3,11 @@
 ## Installing wx-audits
 
 ```bash
-npm install -g wx-audits
+npm install -g wx-audits --unsafe-perm=true
 ```
 
 ## Using wx-audits
+
 ```bash
 wx-audits -h
 Options:
